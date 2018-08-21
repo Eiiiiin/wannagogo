@@ -1,0 +1,29 @@
+{
+    "page":3,
+    "name":"设计师页面",
+    "list":[{
+        "name":"箱包",
+        "id":"1",
+        "img":"/static/img/designerimg1.png"
+    },{
+        "name":"生活家居",
+        "id":"2",
+        "img":"/static/img/designerimg2.png"
+    },{
+        "name":"女装",
+        "id":"3",
+        "img":"/static/img/designerimg3.png"
+    },{
+        "name":"男装",
+        "id":"4",
+        "img":"/static/img/designerimg4.png"
+    },{
+        "name":"美食",
+        "id":"5",
+        "img":"/static/img/designerimg5.png"
+    },{
+        "name":"配饰",
+        "id":"6",
+        "img":"/static/img/designerimg6.png"
+    }]
+}

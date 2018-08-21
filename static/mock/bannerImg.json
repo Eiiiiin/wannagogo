@@ -1,0 +1,22 @@
+{
+    "page":2,
+    "type":1,
+    "name":"轮播图",
+    "list":[{
+        "imgSrc":"/static/img/banner1.png"
+    },{
+        "imgSrc":"/static/img/banner2.png"
+    },{
+        "imgSrc":"/static/img/banner3.png"
+    },{
+        "imgSrc":"/static/img/banner4.png"
+    },{
+        "imgSrc":"/static/img/banner5.png"
+    },{
+        "imgSrc":"/static/img/banner6.png"
+    },{
+        "imgSrc":"/static/img/banner7.png"
+    },{
+        "imgSrc":"/static/img/banner8.png"
+    }]
+}

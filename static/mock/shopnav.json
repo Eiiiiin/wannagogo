@@ -1,0 +1,28 @@
+{
+    "code":1,
+    "list":[{
+        "icon":"/static/img/shopicon1.png",
+        "name":"女装"
+    },{
+        "icon":"/static/img/shopicon2.png",
+        "name":"男装"
+    },{
+        "icon":"/static/img/shopicon3.png",
+        "name":"饰品"
+    },{
+        "icon":"/static/img/shopicon4.png",
+        "name":"箱包"
+    },{
+        "icon":"/static/img/shopicon5.png",
+        "name":"配件"
+    },{
+        "icon":"/static/img/shopicon6.png",
+        "name":"生活家居"
+    },{
+        "icon":"/static/img/shopicon7.png",
+        "name":"好吃的"
+    },{
+        "icon":"/static/img/shopicon8.png",
+        "name":"礼物"
+    }]
+}
