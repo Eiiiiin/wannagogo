@@ -22,7 +22,7 @@
 <script>
 
 
-
+ import iconfont from "../static/aliicon/iconfont.css";
 export default {
   name: 'App',
   data(){

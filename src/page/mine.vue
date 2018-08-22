@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-    import iconfont from "../../static/aliicon/iconfont.css";
+    // import iconfont from "../../static/aliicon/iconfont.css";
     export default {
         name: "mine",
         data() {
@@ -115,6 +115,9 @@
                     height: 6.13rem;
                     border: 1px solid #dadada;
                     padding: 1.5rem 0;
+                    i{
+                         font-size: 1.3rem;
+                    }
                     p {
                         padding-top: 0.81rem;
                     }
@@ -130,6 +133,7 @@
                     border-bottom:1px solid #cdcdcd;
                 }
                 i {
+                   
                     &:last-child {
                         float: right;
                     }

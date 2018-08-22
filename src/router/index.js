@@ -4,6 +4,7 @@ import special from '@/page/special'
 import designer from '@/page/designer'
 import shopping from '@/page/shopping'
 import mine from '@/page/mine'
+import goodsdetails from '@/page/goodsdetails'
 
 Vue.use(Router)
 
@@ -27,5 +28,10 @@ export default new Router({
       name: 'mine',
       component: mine
     },
+    {
+      path:'/goodsdetails',
+      name:'goodsdetails',
+      component:goodsdetails
+    }
   ]
 })

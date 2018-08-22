@@ -15,17 +15,17 @@
         </div>
         <div class="shoplist" v-for="(item,i) in shopList" :key="i">
             <div class="banner">
-                <img :src="item.shopbanner" alt="">
+                <img src="/static/img/shopbanner.png" alt="">
             </div>
-            <div class="tablist">
+            <div class="tablist" >
                 <swiper :shopTabList="shopTabList">
-                    <swiper-slide v-for="(list,i) in item.shoplist" :key="i" class="swiperlist">
-                        <img :src="list.shopImg" alt="">
-                        <p class="shopname">{{list.shopName}}</p>
-                        <p>{{list.shopTip}}</p>
-                        <p>{{list.shopPrice}}</p>
+                    <swiper-slide class="swiperlist">
+                        <img :src="item.pro_img" alt="" @click="goGoodsdetails(item)">
+                        <p class="shopname">{{item.pro_desc}}</p>
+                        <p>{{item.pro_name}}</p>
+                        <p>{{item.pro_price}}</p>
                     </swiper-slide>
-                    <div class="seemore">查看更多</div>
+                    <div class="seemore" @click="seeMore(item)">查看更多</div>
                 </swiper>
             </div>
         </div>
@@ -45,7 +45,7 @@ export default {
       shopNav: [],
       shopTabList: {
         speed: 500,
-        loop: true
+        loop: true,
       },
       shopList: []
     };
@@ -59,17 +59,29 @@ export default {
     });
   },
   methods: {
-    getShopNav: function() {
+    getShopNav: function() {//头部导航
       var that = this;
       that.$axios.get("../../static/mock/shopnav.json").then(function(res) {
         that.shopNav = res.data.list;
       });
     },
-    getshopList: function() {
+    getshopList: function() {//商品列表
       var that = this;
-      that.$axios.get("../../static/mock/shopList.json").then(function(res) {
-        that.shopList = res.data.list;
+      that.$axios.get("http://127.0.0.1:8081/getProductList").then(function(res) {
+        that.shopList = res.data.message;
       });
+    },
+    goGoodsdetails:function(goodsId){//跳转到详情
+        var goodsId = goodsId.pro_id;
+        // alert(goodsId)
+       this.$router.push({
+           name:'goodsdetails',
+           query:{goodsId}
+       })
+    },
+    seeMore:function(goodsId){//查看更多
+        var goodsId = goodsId.pro_id;
+        alert(goodsId)
     }
   }
 };

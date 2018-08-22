@@ -4,11 +4,13 @@
     "list":[{
         "shopbanner":"/static/img/shopbanner.png",
         "shoplist":[{
+            "id":1,
             "shopName":"inflation高街风男装哈哈哈哈哈",
             "shopTip":"腰包/原创设计",
             "shopPrice":"$120",
             "shopImg":"/static/img/shoplist.png"
         },{
+            "id":2,
             "shopName":"碳头又斑马",
             "shopTip":"方包/腰包",
             "shopPrice":"$220",
@@ -17,6 +19,7 @@
     },{
         "shopbanner":"/static/img/shopbanner.png",
         "shoplist":[{
+            "id":3,
             "shopName":"碳头又斑马",
             "shopTip":"方包/腰包",
             "shopPrice":"$220",
