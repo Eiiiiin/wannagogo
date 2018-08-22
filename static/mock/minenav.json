@@ -1,0 +1,25 @@
+{
+    "name":"minenav",
+    "code":1,
+    "list":[{
+        "icon":"&#xe707;",
+        "tip":"我的订单",
+        "class":"icon-wodedingdan"
+    },{
+        "icon":"&#xe602;",
+        "tip":"购物车",
+        "class":"icon-gouwuche"
+    },{
+        "icon":"&#xe646;",
+        "tip":"我的优惠卷",
+        "class":"icon-youhuijuan"
+    },{
+        "icon":"&#xe761;",
+        "tip":"喜好的物品",
+        "class":"icon-aixin"
+    },{
+        "icon":"&#xe600;",
+        "tip":"设计师驻入",
+        "class":"icon-fz"
+    }]
+}
