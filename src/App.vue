@@ -45,6 +45,11 @@ export default {
         imgSrc:require('./assets/tab4.png')
       },]
     }
+  },
+  methods:{
+    gogogo:function(){
+      alert('1111')
+    }
   }
 }
 </script>

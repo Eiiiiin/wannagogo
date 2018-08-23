@@ -1,10 +1,16 @@
 <template>
     <div id="mine">
+        <div class="wrapper" ref="wrapper">
+      <ul>
+        <li v-for="item in 8">{{item}}</li>
+      </ul>
+  </div>
         <header>
+            <div>
             <i class="minemsg"></i>
             <div class="btn">
                 <p>在这里,找到属于你的不一样</p>
-                <el-button>登陆/注册</el-button>
+                <el-button @click="goLogin">登陆/注册</el-button>
             </div>
             <div class="toptip">
                 <li>
@@ -15,6 +21,7 @@
                     <p>0</p>
                     <p>粉丝</p>
                 </li>
+            </div>
             </div>
         </header>
         <div class="main">
@@ -41,30 +48,49 @@
 </template>
 <script>
     // import iconfont from "../../static/aliicon/iconfont.css";
+    import BScroll from 'better-scroll'
     export default {
         name: "mine",
         data() {
             return {
-                mineNav: []
+                mineNav: [],
+            
             };
         },
         created() {
             this.getmineNav("", data => {
                 this.getmineNav.data;
             });
+          
+        },
+        mounted(){
+        this.$nextTick(() => {
+          this.scroll = new BScroll(this.$refs.wrapper);
+        });
         },
         methods: {
+            
             getmineNav: function() {
                 var that = this;
                 that.$axios.get("../../static/mock/minenav.json").then(function(res) {
                     that.mineNav = res.data.list;
                 });
+            },
+            goLogin:function(){
+                this.$router.push({name:'login'})
             }
         }
     };
 </script>
 <style lang="less" scoped>
     #mine {
+        .wrapper{
+    overflow:hidden;
+    height:100vh;
+  }
+  ul li{
+    height:400px;
+  }
         header {
             border-bottom: 0.63rem solid #f0f0f0;
             background: url("../../static/img/minelogo.png") no-repeat center;

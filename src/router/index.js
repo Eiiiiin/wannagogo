@@ -5,6 +5,8 @@ import designer from '@/page/designer'
 import shopping from '@/page/shopping'
 import mine from '@/page/mine'
 import goodsdetails from '@/page/goodsdetails'
+import login from '@/page/login'
+import demo from '@/page/demo'
 
 Vue.use(Router)
 
@@ -32,6 +34,15 @@ export default new Router({
       path:'/goodsdetails',
       name:'goodsdetails',
       component:goodsdetails
+    },
+    {
+      path:'/login',
+      name:'login',
+      component:login
+    },{
+      path:'/demo',
+      name:'demo',
+      component:demo
     }
   ]
 })

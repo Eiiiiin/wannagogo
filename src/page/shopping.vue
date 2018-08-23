@@ -69,10 +69,12 @@ export default {
       var that = this;
       that.$axios.get("http://127.0.0.1:8081/getProductList").then(function(res) {
         that.shopList = res.data.message;
+       
       });
     },
     goGoodsdetails:function(goodsId){//跳转到详情
         var goodsId = goodsId.pro_id;
+     
         // alert(goodsId)
        this.$router.push({
            name:'goodsdetails',
@@ -124,6 +126,9 @@ export default {
       margin: 0 auto;
       text-align: center;
       padding: 0.6rem 0;
+      img{
+        // width: 1.5rem;
+      }
     }
     border-bottom: 0.63rem solid #f0f0f0;
   }

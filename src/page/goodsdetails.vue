@@ -1,36 +1,91 @@
 <template>
-    <div id="goodsdetails">
-        <header>
-            <!-- {{this.$route.query.goodsId}} -->
-            <i class="goback iconfont icon-zuojiantou"></i>
-            <i class="goback iconfont icon-fenxiang1"></i>
-            <i class="goback iconfont icon-gouwuche1"></i>
-        </header>
-        <div class="banner">
-            <swiper :options="banner" ref="mySwiper">
-                <swiper-slide  v-for="(item,i) in bannerImg" :key="i">
-                    <img :src="item.img" alt="">
-                </swiper-slide>
-            </swiper>
-                <div class="swiper-pagination" slot="pagination"></div>
-        </div>
-        <div class="goodsinfo">
-            <li>
-                <div>
-
-                </div>
-                <div>
-
-                </div>
-            </li>
-            <li>2</li>
-            <li>3</li>
-        </div>
+  <div id="goodsdetails">
+    <header>
+      <!-- {{this.$route.query.goodsId}} -->
+      <i class="goback iconfont icon-zuojiantou" @click="goBack"></i>
+      <i class=" iconfont icon-fenxiang1"></i>
+      <i class=" iconfont icon-gouwuche1"></i>
+    </header>
+    <div class="banner">
+      <swiper :options="banner" ref="mySwiper">
+        <swiper-slide v-for="(item,i) in goodsInfo.bannerList" :key="i">
+          <img :src="item" alt="">
+        </swiper-slide>
+      </swiper>
+      <div class="swiper-pagination" slot="pagination"></div>
     </div>
+    <div class="goodsinfo">
+      <li>
+        <p>{{goodsInfo.pro_desc}}</p>
+      </li>
+      <li>
+        <el-row>
+          <el-col :span="12">
+            <p>
+              <span>¥</span>
+              <span>{{goodsInfo.pro_price}}</span>
+              </p>
+            <p>
+              <span>邮费:</span>
+              <span>123</span>
+              <span>元</span>
+              </p>
+          </el-col>
+          <el-col :span="12">
+           <p>
+             <i class="iconfont icon-aixin"></i>
+           </p>
+           <p>
+             <span>12</span>
+           </p>
+          </el-col>
+        </el-row>
+      </li>
+      <li>登陆后,分享获得xxxxx</li>
+      <li>
+        <div>
+          <i class="iconfont icon-gou"></i>
+          <span>7天无理由退货</span>
+        </div>
+        <div>
+          <i class="iconfont icon-gou"></i>
+          <span>48小时发货</span>
+        </div>
+        <div>
+          <i class="iconfont icon-gou"></i>
+          <span>担保交易</span>
+        </div>
+      </li>
+    </div>
+    <div class="designer">
+      <li>
+        <div>
+        <img :src="goodsInfo.desi_avatar" alt="">
+        <span>主理人:</span>
+        <span>{{goodsInfo.desi_name}}</span>
+        <i class="iconfont icon-icon"></i>
+        </div>
+      </li>
+      <li>
+        <div class="brand">
+        <img :src="goodsInfo.brand_logo" alt="">
+        <span>品牌:</span>
+        <span>{{goodsInfo.brand_name}}</span>
+        <i class="iconfont icon-icon"></i>
+        <p>{{goodsInfo.brand_desc}}}</p>
+        </div>
+      </li>
+    </div>
+    <div class="wx">
+    <i class="iconfont icon-weixin"></i>
+    <p>加Ein微信:FHSJDKFHSDKJFHDS,成为好友,超多朋友福利.带你认识更多设计师哦~</p>
+      
+      
+    </div>
+  </div>
 </template>
 <script>
 // import iconfont from "../../static/aliicon/iconfont.css";
-
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
@@ -45,21 +100,31 @@ export default {
           bulletElement: "li"
         }
       },
-      bannerImg: [
-        {
-          img: require("../../static/img/shopbanner.png")
-        },
-        {
-          img: require("../../static/img/shopbanner.png")
-        },
-        {
-          img: require("../../static/img/shopbanner.png")
-        }
-      ]
+      goodsInfo:[]
     };
   },
-  created() {},
-  methods: {},
+  created() {
+    this.getGoodsInfo("",data=>{
+      this.getGoodsInfo.data;
+    })
+  },
+  methods: {
+    getGoodsInfo:function(){
+      let that = this;
+      // let id =that.$route.query.goodsId;
+      let id = parseInt(that.$route.query.goodsId);
+      // let id = 1;
+      that.$axios.get('http://127.0.0.1:8081/getProductDetail',
+        {params:{id}}
+      ).then(function(res){
+     
+       that.goodsInfo = res.data.message
+      })
+    },
+    goBack:function(){
+      this.$router.push({name:'shopping'})
+    }
+  },
   components: {
     swiper,
     swiperSlide
@@ -90,47 +155,123 @@ export default {
   }
   .banner {
     position: relative;
+  
     .swiper-container {
       .swiper-slide {
+          height: 24rem;
         img {
           width: 100%;
+          height:100%;
         }
       }
     }
     .swiper-pagination {
       width: 4.69rem;
       position: absolute;
-      bottom: 12%;
-      left: 47%;
+      bottom: 3%;
+      left: 40%;
     }
   }
-  .goodsinfo{
-      li:first-child{
+  .goodsinfo {
+    padding-left: 9px;
+    padding-right: 14px;
+    border-bottom: 0.63rem solid #f0f0f0;
+    li:first-child {
+      padding-top: 12px;
+      padding-bottom: 17px;
+      font-size: 14px;
+    }
+    li:nth-child(2) {
+      border-bottom: 1px dotted #ccc;
+      padding-bottom: 7px;
+      .el-row {
+        .el-col:first-child {
+          font-size: 16px;
+          p:first-child {
+            color: #d2a853;
+            font-size: 21px;
+            padding-bottom: 8px;
+          }
+          p:last-child {
+            color: #7b7b7b;
+          }
+        }
+        .el-col:last-child {
+          text-align: right;
+          p {
+            color: #747474;
+          }
+          p:first-child {
+            padding-bottom: 4px;
+          }
+        }
+      }
+    }
+    li:nth-child(3) {
+      border-bottom: 1px dotted #ccc;
+      padding: 12px 0;
+    }
+    li:last-child {
       overflow: hidden;
-
-          div:first-child{
-              float: left;
-              background-color: red;
-              width: 100px;
-              height: 10px;
-          }
-          div:last-child{
-              float: right;
-               width: 100px;
-              height: 10px;
-              background-color: #333;
-          }
+      padding: 12px 0;
+      div {
+        color: #818181;
+        float: left;
+        padding-right: 12px;
       }
-      li:nth-child(2){
-          
-          background-color: #cdcdcd;
-
+    }
+  }
+  .designer {
+    padding-left: 9px;
+    padding-right: 14px;
+    border-bottom: 0.63rem solid #f0f0f0;
+    li {
+      color: #6a6a6a;
+      div {
+        overflow: hidden;
+        width: 100%;
+        padding-top: 25px;
+        padding-bottom: 16px;
+        img {
+          width: 0.94rem;
+          height: 0.94rem;
+        }
+        span {
+          line-height: 1.88rem;
+          color: #1f1f1f;
+        }
+        i {
+          float: right;
+          font-size: 20px;
+          padding-top: 5px;
+        }
       }
-      li:last-child{
-          
-           
-          background-color: red;
+      .brand {
+        p {
+          color: #6a6a6a;
+        }
+        padding-top: 20px;
+        padding-bottom: 60px;
       }
-      }
+    }
+  }
+  .wx {
+    padding-left: 9px;
+    padding-right: 14px;
+    padding-top: 28px;
+    padding-bottom:14px;
+    border-bottom: 0.63rem solid #f0f0f0;
+    position: relative;
+    i {
+      position: absolute;
+      left: 8px;
+      top: 31px;
+      color:#6fbd4a;
+    }
+    p{
+      color:#7d7d7d;
+      padding-left: 24px;
+    }
+  }
 }
 </style>
