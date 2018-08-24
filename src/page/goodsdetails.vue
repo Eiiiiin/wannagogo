@@ -7,20 +7,25 @@
       <i class=" iconfont icon-gouwuche1"></i>
     </header>
     <div class="banner">
-      <swiper :options="banner" ref="mySwiper">
+      <!-- <swiper :options="banner" ref="mySwiper">
         <swiper-slide v-for="(item,i) in goodsInfo.bannerList" :key="i">
           <img :src="item" alt="">
         </swiper-slide>
       </swiper>
-      <div class="swiper-pagination" slot="pagination"></div>
+      <div class="swiper-pagination" slot="pagination"></div> -->
+      <van-swipe>
+  <van-swipe-item v-for="(item,i) in goodsInfo.bannerList" :key="i">
+    <img :src="item" />
+  </van-swipe-item>
+</van-swipe>
     </div>
     <div class="goodsinfo">
       <li>
         <p>{{goodsInfo.pro_desc}}</p>
       </li>
       <li>
-        <el-row>
-          <el-col :span="12">
+        <van-row>
+          <van-col :span="12">
             <p>
               <span>¥</span>
               <span>{{goodsInfo.pro_price}}</span>
@@ -30,16 +35,16 @@
               <span>123</span>
               <span>元</span>
               </p>
-          </el-col>
-          <el-col :span="12">
+          </van-col>
+          <van-col :span="12">
            <p>
              <i class="iconfont icon-aixin"></i>
            </p>
            <p>
              <span>12</span>
            </p>
-          </el-col>
-        </el-row>
+          </van-col>
+        </van-row>
       </li>
       <li>登陆后,分享获得xxxxx</li>
       <li>
@@ -72,22 +77,34 @@
         <span>品牌:</span>
         <span>{{goodsInfo.brand_name}}</span>
         <i class="iconfont icon-icon"></i>
-        <p>{{goodsInfo.brand_desc}}}</p>
+        <p>{{goodsInfo.brand_desc}}</p>
         </div>
       </li>
     </div>
     <div class="wx">
     <i class="iconfont icon-weixin"></i>
     <p>加Ein微信:FHSJDKFHSDKJFHDS,成为好友,超多朋友福利.带你认识更多设计师哦~</p>
-      
-      
+    </div>
+    <div class="notail">
+      <p>店铺公告</p>
+      <p>这是一条公告~</p>
+    </div>
+    <div class="like">
+      <p>喜欢<span>12</span></p>
+      <ul>
+        <li><i class="iconfont icon-weixin"></i></li>
+        <li><i class="iconfont icon-weixin"></i></li>
+        <li><i class="iconfont icon-weixin"></i></li>
+        <li><i class="iconfont icon-weixin"></i></li>
+        <li><i class="iconfont icon-weixin"></i></li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
 // import iconfont from "../../static/aliicon/iconfont.css";
-import "swiper/dist/css/swiper.css";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+// import "swiper/dist/css/swiper.css";
+// import { swiper, swiperSlide } from "vue-awesome-swiper";
 export default {
   name: "mine",
   data() {
@@ -100,34 +117,33 @@ export default {
           bulletElement: "li"
         }
       },
-      goodsInfo:[]
+      goodsInfo: []
     };
   },
   created() {
-    this.getGoodsInfo("",data=>{
+    this.getGoodsInfo("", data => {
       this.getGoodsInfo.data;
-    })
+    });
   },
   methods: {
-    getGoodsInfo:function(){
+    getGoodsInfo: function() {
       let that = this;
       // let id =that.$route.query.goodsId;
       let id = parseInt(that.$route.query.goodsId);
       // let id = 1;
-      that.$axios.get('http://127.0.0.1:8081/getProductDetail',
-        {params:{id}}
-      ).then(function(res){
-     
-       that.goodsInfo = res.data.message
-      })
+      that.$axios
+        .get("http://127.0.0.1:8081/getProductDetail", { params: { id } })
+        .then(function(res) {
+          that.goodsInfo = res.data.message;
+        });
     },
-    goBack:function(){
-      this.$router.push({name:'shopping'})
+    goBack: function() {
+      this.$router.push({ name: "shopping" });
     }
   },
   components: {
-    swiper,
-    swiperSlide
+    // swiper,
+    // swiperSlide
   }
 };
 </script>
@@ -155,22 +171,22 @@ export default {
   }
   .banner {
     position: relative;
-  
-    .swiper-container {
-      .swiper-slide {
-          height: 24rem;
+
+    .van-swipe {
+      .van-swipe-item {
+        height: 24rem;
         img {
           width: 100%;
-          height:100%;
+          height: 100%;
         }
       }
     }
-    .swiper-pagination {
-      width: 4.69rem;
-      position: absolute;
-      bottom: 3%;
-      left: 40%;
-    }
+    // .swiper-pagination {
+    //   width: 4.69rem;
+    //   position: absolute;
+    //   bottom: 3%;
+    //   left: 40%;
+    // }
   }
   .goodsinfo {
     padding-left: 9px;
@@ -184,8 +200,8 @@ export default {
     li:nth-child(2) {
       border-bottom: 1px dotted #ccc;
       padding-bottom: 7px;
-      .el-row {
-        .el-col:first-child {
+      .van-row {
+        .van-col:first-child {
           font-size: 16px;
           p:first-child {
             color: #d2a853;
@@ -196,7 +212,7 @@ export default {
             color: #7b7b7b;
           }
         }
-        .el-col:last-child {
+        .van-col:last-child {
           text-align: right;
           p {
             color: #747474;
@@ -259,18 +275,49 @@ export default {
     padding-left: 9px;
     padding-right: 14px;
     padding-top: 28px;
-    padding-bottom:14px;
+    padding-bottom: 14px;
     border-bottom: 0.63rem solid #f0f0f0;
     position: relative;
     i {
       position: absolute;
       left: 8px;
       top: 31px;
-      color:#6fbd4a;
+      color: #6fbd4a;
     }
-    p{
-      color:#7d7d7d;
+    p {
+      color: #7d7d7d;
       padding-left: 24px;
+    }
+  }
+  .notail{
+       padding-left: 9px;
+    padding-right: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    border-bottom: 0.63rem solid #f0f0f0;
+    p{
+      padding:5px 0;
+    }
+    p:first-child{
+      font-weight:bolder;
+    }
+  }
+  .like{
+      padding-left: 9px;
+    padding-right: 14px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    p{
+       font-weight:bolder;
+    }
+    // border-bottom: 0.63rem solid #f0f0f0;
+    ul{
+      overflow: hidden;
+      li{
+        float: left;
+        padding: 4px;
+        i{font-size: 45px;}
+      }
     }
   }
 }

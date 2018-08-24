@@ -47,10 +47,10 @@ export default {
 </script>
 <style lang="less" scoped>
 #login {
-        height: 100%;
-    z-index: 9999999;
-    position: fixed;
-    background-color: #fff;
+    //     height: 100%;
+    // z-index: 9999999;
+    // position: fixed;
+    // background-color: #fff;
   header {
     height: 4.13rem;
     text-align: center;

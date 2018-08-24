@@ -6,12 +6,12 @@
             <div> <i class="el-icon-search"></i> <span>搜索好设计 </span> <img class="scan" :src="headericon1" alt=""> <img class="message" :src="headericon2" alt=""> </div>
         </header>
         <div class="shopnav">
-            <el-row>
-                <el-col :span="6" v-for="(item,i) in shopNav" :key="i" class="shopnavlist">
+            <van-row>
+                <van-col :span="6" v-for="(item,i) in shopNav" :key="i" class="shopnavlist">
                     <img :src="item.icon" alt="">
                     <p>{{item.name}}</p>
-                </el-col>
-            </el-row>
+                </van-col>
+            </van-row>
         </div>
         <div class="shoplist" v-for="(item,i) in shopList" :key="i">
             <div class="banner">
@@ -29,11 +29,13 @@
                 </swiper>
             </div>
         </div>
+        <footercom />
     </div>
 </template>
 <script>
 import "swiper/dist/css/swiper.css";
 import { swiper, swiperSlide } from "vue-awesome-swiper";
+import footercom from '@/components/footercom';
 
 export default {
   name: "",
@@ -85,6 +87,9 @@ export default {
         var goodsId = goodsId.pro_id;
         alert(goodsId)
     }
+  },
+  components:{
+    footercom
   }
 };
 </script>

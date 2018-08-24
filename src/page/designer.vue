@@ -6,16 +6,19 @@
             </transition>
         </header>
        <div class="main">
-           <el-row :gutter="2">
-  <el-col :span="12" v-for="(item,i) in designerList" :key="i">
+           <van-row :gutter="2">
+  <van-col :span="12" v-for="(item,i) in designerList" :key="i">
       <img :src="item.img" alt="">
-      </el-col>
+      </van-col>
  
-</el-row>
+</van-row>
        </div>
+       <footercom />
     </div>
 </template>
 <script>
+import footercom from '@/components/footercom'
+
 export default {
 
 
@@ -51,6 +54,9 @@ export default {
       if (imgY > 400) {
       }
     }
+  },
+  components:{
+    footercom
   }
 };
 </script>
@@ -65,21 +71,15 @@ export default {
       width: 100%;
     }
   }
-  .fade-enter-active,
-  .fade-leave-active {
-    transition-duration: 1s;
-    transition: scale(1.5, 1.5);
-    transition: rotate(-80deg);
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    transition-duration: 1s;
-    transition: scale(1, 1);
-  }
+
   .main {
+    .van-row{
+      margin:0!important;
     img {
       display: inline-block;
       width: 100%;
       height: 100%;
+    }
     }
   }
 }
