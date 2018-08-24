@@ -1,5 +1,6 @@
 <template>
     <div id="designer">
+       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <header>
             <transition>
             <img ref='topImg' v-if="show"  class="abc" src="../../static/img/designerimgtop.png" alt="" @touchmove='ImgSize'>
@@ -13,6 +14,7 @@
  
 </van-row>
        </div>
+       </van-pull-refresh>
        <footercom />
     </div>
 </template>
@@ -27,7 +29,8 @@ export default {
     return {
       imgPageY: 401,
       show: true,
-      designerList: []
+      designerList: [],
+      isLoading: false
     };
   },
   created() {
@@ -53,6 +56,13 @@ export default {
       // this.$refs.topImg.style[transform] = `scale(${scale})`
       if (imgY > 400) {
       }
+    },
+           onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+        this.count++;
+      }, 500);
     }
   },
   components:{

@@ -41,6 +41,10 @@ Vue.prototype.common = common
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 Vue.prototype.$axios = axios
 /* eslint-disable no-new */
+
+
+
+
 new Vue({
   el: '#app',
   router,

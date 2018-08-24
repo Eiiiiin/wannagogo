@@ -1,5 +1,6 @@
 <template>
     <div id="mine">
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <header>
             <div>
                 <i class="minemsg"></i>
@@ -19,6 +20,7 @@
                 </div>
             </div>
         </header>
+       
         <div class="main">
             <van-row>
                 <van-col :span="8" v-for="(item,i) in mineNav" :key="i" class="maincol">
@@ -39,6 +41,7 @@
                 <i class="iconfont icon-icon"></i>
             </li>
         </div>
+         </van-pull-refresh>
         <footercom />
     </div>
 </template>
@@ -51,6 +54,7 @@
         data() {
             return {
                 mineNav: [],
+                isLoading: false
             };
         },
         created() {
@@ -70,7 +74,16 @@
                 this.$router.push({
                     name: 'login'
                 })
-            }
+            },
+              onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+        this.count++;
+      }, 500);
+    }
+  
+            
         },
         components: {
             footercom
@@ -79,13 +92,6 @@
 </script>
 <style lang="less" scoped>
     #mine {
-        .wrapper {
-            overflow: hidden;
-            height: 100vh;
-        }
-        ul li {
-            height: 400px;
-        }
         header {
             border-bottom: 0.63rem solid #f0f0f0;
             background: url("../../static/img/minelogo.png") no-repeat center;
@@ -133,14 +139,16 @@
                 .van-col {
                     text-align: center !important;
                     color: #6c6c6c;
-                    height: 6.13rem;
+                    // height: 6.13rem;
+                    height:4.13rem;
                     border: 1px solid #dadada;
-                    padding: 1.5rem 0;
+                    padding: .5rem 0;
                     i {
-                        font-size: 1.3rem;
+                        // font-size: 1.3rem;
                     }
                     p {
-                        padding-top: 0.81rem;
+                        padding-top: 0.41rem;
+                        font-size: 10px;
                     }
                 }
             }
@@ -148,8 +156,9 @@
         .setbox {
             li {
                 overflow: hidden;
-                padding: 1.25rem;
+                    padding: .55rem 1.25rem;
                 border-top: 1px solid #cdcdcd;
+                font-size: 14px;
                 &:last-child {
                     border-bottom: 1px solid #cdcdcd;
                 }

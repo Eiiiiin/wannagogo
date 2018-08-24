@@ -2,6 +2,7 @@
   <div id="app">
 
       <div style="padding:0;padding-bottom:3.5rem">
+        
     <router-view/>
       </div>
      

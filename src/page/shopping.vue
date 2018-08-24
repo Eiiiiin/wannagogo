@@ -1,6 +1,7 @@
 <template>
 
     <div id="shopping">
+       <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <header>
            
             <div> <i class="el-icon-search"></i> <span>搜索好设计 </span> <img class="scan" :src="headericon1" alt=""> <img class="message" :src="headericon2" alt=""> </div>
@@ -29,6 +30,7 @@
                 </swiper>
             </div>
         </div>
+         </van-pull-refresh>
         <footercom />
     </div>
 </template>
@@ -48,8 +50,10 @@ export default {
       shopTabList: {
         speed: 500,
         loop: true,
+        
       },
-      shopList: []
+      shopList: [],
+       isLoading: false
     };
   },
   created() {
@@ -86,6 +90,13 @@ export default {
     seeMore:function(goodsId){//查看更多
         var goodsId = goodsId.pro_id;
         alert(goodsId)
+    },
+          onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+        this.count++;
+      }, 500);
     }
   },
   components:{
