@@ -93,6 +93,7 @@
         <li><i class="iconfont icon-weixin"></i></li>
       </ul>
     </div>
+       </van-pull-refresh>
     <footer>
       <van-row>
         <van-col span='4'>
@@ -109,7 +110,7 @@
         </van-col>
       </van-row>
     </footer>
-    </van-pull-refresh>
+   
   </div>
 </template>
 <script>
@@ -194,6 +195,8 @@
 </script>
 <style lang="less" scoped>
   #goodsdetails {
+    .van-pull-refresh{
+        padding-bottom: 45px;
     header {
       overflow: hidden;
       i {
@@ -358,6 +361,7 @@
           }
         }
       }
+    }
     }
     footer {
       position: fixed;

@@ -92,6 +92,10 @@
 </script>
 <style lang="less" scoped>
     #mine {
+        height:100%;
+        .van-pull-refresh{
+            height:100%;
+        }
         header {
             border-bottom: 0.63rem solid #f0f0f0;
             background: url("../../static/img/minelogo.png") no-repeat center;

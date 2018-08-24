@@ -1,13 +1,6 @@
 <template>
-  <div id="app">
-
-      <div style="padding:0;padding-bottom:3.5rem">
-        
-    <router-view/>
-      </div>
-     
-
-    
+  <div id="app">      
+    <router-view/> 
   </div>
 </template>
 
@@ -31,6 +24,9 @@ export default {
 </script>
 
 <style lang='less'>
+html,body{
+  height: 100%;
+}
 html,body,ul,li,a,p,h1,h2,h3{
   margin:0;
   padding:0;
