@@ -1,10 +1,5 @@
 <template>
     <div id="mine">
-        <div class="wrapper" ref="wrapper">
-      <ul>
-        <li v-for="item in 8">{{item}}</li>
-      </ul>
-  </div>
         <header>
             <div>
             <i class="minemsg"></i>
@@ -48,7 +43,6 @@
 </template>
 <script>
     // import iconfont from "../../static/aliicon/iconfont.css";
-    import BScroll from 'better-scroll'
     export default {
         name: "mine",
         data() {
@@ -64,12 +58,8 @@
           
         },
         mounted(){
-        this.$nextTick(() => {
-          this.scroll = new BScroll(this.$refs.wrapper);
-        });
         },
         methods: {
-            
             getmineNav: function() {
                 var that = this;
                 that.$axios.get("../../static/mock/minenav.json").then(function(res) {

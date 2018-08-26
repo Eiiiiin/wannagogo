@@ -28,33 +28,33 @@ mounted () {
 },
 methods: {
   getDate (offset, fn) {
-    $http.get({
-      url: 'api/goods?',
-      data: {
-        'authToken': this.$route.params.authToken, 
-        'offset': offset,
-        'limit': 10
-      },
-      success: data => {
-        if (data.length < 10) {    //每次请求数据是10条，如果数据不够10条，就是没数据了 让页数=0；
-          this.offset = 0
-          fn(true)
-          return
-        } else {
-          if (fn) fn()
-        }
-        if (offset === 1) {
-          this.items = data   //如果是想下滑动，刷新数据 就让items等于最新数据
-        } else {
-          this.items = this.items.concat(data) //否则就把数据拼接
-        }
-      },
-      error: err => {
-        console.log(err, '----------err')
-        // let message = err.response
-        // toastr.toastrUtil(message.data[0].errorMessage)
-      }
-    })
+    // $http.get({
+    //   url: 'api/goods?',
+    //   data: {
+    //     'authToken': this.$route.params.authToken, 
+    //     'offset': offset,
+    //     'limit': 10
+    //   },
+    //   success: data => {
+    //     if (data.length < 10) {    //每次请求数据是10条，如果数据不够10条，就是没数据了 让页数=0；
+    //       this.offset = 0
+    //       fn(true)
+    //       return
+    //     } else {
+    //       if (fn) fn()
+    //     }
+    //     if (offset === 1) {
+    //       this.items = data   //如果是想下滑动，刷新数据 就让items等于最新数据
+    //     } else {
+    //       this.items = this.items.concat(data) //否则就把数据拼接
+    //     }
+    //   },
+    //   error: err => {
+    //     console.log(err, '----------err')
+    //     // let message = err.response
+    //     // toastr.toastrUtil(message.data[0].errorMessage)
+    //   }
+    // })
   },
   infinite (done) {
     this.offset++    //每当向上滑动的时候就让页数加1

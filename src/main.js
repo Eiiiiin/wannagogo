@@ -15,7 +15,6 @@ import 'swiper/dist/css/swiper.css'
 import common from './utils/utils.js'//公共方法引入
 import ComUrls from '../config/ComUrls'//配置axios
 
-import BScroll from 'better-scroll'//滚动条插件
 
 import VueScroller from 'vue-scroller'
 
@@ -25,7 +24,6 @@ Vue.use(ElementUI);
 Vue.use(vuex);
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueScroller)
-// Vue.use(BScroll)
 
 //配置公共方法
 Vue.use(common)
