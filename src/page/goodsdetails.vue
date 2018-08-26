@@ -114,9 +114,7 @@
   </div>
 </template>
 <script>
-  import {
-    Toast
-  } from 'vant';
+  import { Toast} from 'vant';
   export default {
     name: "mine",
     data() {

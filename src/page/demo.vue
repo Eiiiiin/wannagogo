@@ -1,11 +1,5 @@
 <template>
-    <scroller :on-infinite="infinite"  :on-refresh = "refresh" ref="my_scroller">
-  <div style="height: 1px;"></div>
-  <div v-for="(item, index) in items" >
-      <div  :key="item.id" class="row" :class="{'grey-bg': index % 2 == 0}">
-        {{item.name}} </div>
-        </div>
-    </scroller>
+
 </template>
 <script>
 // import $http from '@/utils/http.js'       //ajax请求

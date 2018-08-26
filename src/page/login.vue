@@ -5,9 +5,9 @@
             <span>密码登录</span>
         </header>
         <div class="main">
-            <el-input placeholder="请输入手机或邮箱"></el-input>
-            <el-input placeholder="请输入登录密码"></el-input>
-            <el-button>登陆</el-button>
+            <van-field placeholder="请输入手机或邮箱"></van-field>
+            <van-field placeholder="请输入登录密码"></van-field>
+            <van-button @click="okLogin">登陆</van-button>
         </div>
         <div class="otherway">
             <div class="forget">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { Toast} from 'vant';
+
 export default {
   name: "login",
   data() {
@@ -40,6 +42,12 @@ export default {
       goBack:function(){
           this.common.cheakLogin()
           history.back(-1);
+      },
+      okLogin:function(){
+        Toast.loading({
+  mask: true,
+  message: '登录中...'
+});
       }
   },
   components: {}
@@ -70,9 +78,9 @@ export default {
   .main {
     padding: 0 2%;
     padding-top: 10px;
-    .el-input {
+    .van-field {
     }
-    .el-button {
+    .van-button {
       width: 100%;
       margin-top: 22px;
       background-color: #2e2e2e;
