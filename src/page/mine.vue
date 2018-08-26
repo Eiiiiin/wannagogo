@@ -1,31 +1,33 @@
 <template>
     <div id="mine">
+        <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
         <header>
             <div>
-            <i class="minemsg"></i>
-            <div class="btn">
-                <p>在这里,找到属于你的不一样</p>
-                <el-button @click="goLogin">登陆/注册</el-button>
-            </div>
-            <div class="toptip">
-                <li>
-                    <p>0</p>
-                    <p>关注</p>
-                </li>
-                <li>
-                    <p>0</p>
-                    <p>粉丝</p>
-                </li>
-            </div>
+                <i class="minemsg"></i>
+                <div class="btn">
+                    <p>在这里,找到属于你的不一样</p>
+                    <van-button @click="goLogin">登陆/注册</van-button>
+                </div>
+                <div class="toptip">
+                    <li>
+                        <p>0</p>
+                        <p>关注</p>
+                    </li>
+                    <li>
+                        <p>0</p>
+                        <p>粉丝</p>
+                    </li>
+                </div>
             </div>
         </header>
+       
         <div class="main">
-            <el-row>
-                <el-col :span="8" v-for="(item,i) in mineNav" :key="i" class="maincol">
+            <van-row>
+                <van-col :span="8" v-for="(item,i) in mineNav" :key="i" class="maincol">
                     <i :class="item.class" class="iconfont"></i>
                     <p>{{item.tip}}</p>
-                </el-col>
-            </el-row>
+                </van-col>
+            </van-row>
         </div>
         <div class="setbox">
             <li>
@@ -39,26 +41,28 @@
                 <i class="iconfont icon-icon"></i>
             </li>
         </div>
+         </van-pull-refresh>
+        <footercom />
     </div>
 </template>
 <script>
     // import iconfont from "../../static/aliicon/iconfont.css";
+    // import BScroll from 'better-scroll';
+    import footercom from '@/components/footercom';
     export default {
         name: "mine",
         data() {
             return {
                 mineNav: [],
-            
+                isLoading: false
             };
         },
         created() {
             this.getmineNav("", data => {
                 this.getmineNav.data;
             });
-          
         },
-        mounted(){
-        },
+        mounted() {},
         methods: {
             getmineNav: function() {
                 var that = this;
@@ -66,21 +70,32 @@
                     that.mineNav = res.data.list;
                 });
             },
-            goLogin:function(){
-                this.$router.push({name:'login'})
-            }
+            goLogin: function() {
+                this.$router.push({
+                    name: 'login'
+                })
+            },
+              onRefresh() {
+      setTimeout(() => {
+        this.$toast('刷新成功');
+        this.isLoading = false;
+        this.count++;
+      }, 500);
+    }
+  
+            
+        },
+        components: {
+            footercom
         }
     };
 </script>
 <style lang="less" scoped>
     #mine {
-        .wrapper{
-    overflow:hidden;
-    height:100vh;
-  }
-  ul li{
-    height:400px;
-  }
+        height:100%;
+        .van-pull-refresh{
+            height:100%;
+        }
         header {
             border-bottom: 0.63rem solid #f0f0f0;
             background: url("../../static/img/minelogo.png") no-repeat center;
@@ -102,7 +117,7 @@
                     color: #8d8d8e;
                     padding-bottom: 1.13rem;
                 }
-                .el-button {
+                .van-button {
                     border: 2px solid #8b8c8c;
                     background-color: #1a1b1c;
                 }
@@ -124,18 +139,20 @@
         }
         .main {
             border-bottom: 0.63rem solid #f0f0f0;
-            .el-row {
-                .el-col {
+            .van-row {
+                .van-col {
                     text-align: center !important;
                     color: #6c6c6c;
-                    height: 6.13rem;
+                    // height: 6.13rem;
+                    height:4.13rem;
                     border: 1px solid #dadada;
-                    padding: 1.5rem 0;
-                    i{
-                         font-size: 1.3rem;
+                    padding: .5rem 0;
+                    i {
+                        // font-size: 1.3rem;
                     }
                     p {
-                        padding-top: 0.81rem;
+                        padding-top: 0.41rem;
+                        font-size: 10px;
                     }
                 }
             }
@@ -143,13 +160,13 @@
         .setbox {
             li {
                 overflow: hidden;
-                padding: 1.25rem;
+                    padding: .55rem 1.25rem;
                 border-top: 1px solid #cdcdcd;
-                &:last-child{
-                    border-bottom:1px solid #cdcdcd;
+                font-size: 14px;
+                &:last-child {
+                    border-bottom: 1px solid #cdcdcd;
                 }
                 i {
-                   
                     &:last-child {
                         float: right;
                     }
