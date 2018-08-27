@@ -8,11 +8,15 @@ import router from './router'
 import axios from 'axios'
 import vuex from 'vuex'
 
+import store from './store'
+
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
 
 import Vant from 'vant';
 import 'vant/lib/vant-css/index.css';
+import { Sku } from 'vant';
+
 
 
 
@@ -24,12 +28,12 @@ import ComUrls from '../config/ComUrls'//配置axios
 
 Vue.config.productionTip = false
 
-// Vue.use(ElementUI);
+
 Vue.use(vuex);
 Vue.use(VueAwesomeSwiper)
-// Vue.use(VueScroller)
-// Vue.use(BScroll)
+
 Vue.use(Vant);
+Vue.use(Sku);
 
 
 //配置公共方法
@@ -44,10 +48,12 @@ Vue.prototype.$axios = axios
 
 
 
+  
 
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

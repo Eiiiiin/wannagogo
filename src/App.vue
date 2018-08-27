@@ -12,13 +12,23 @@ export default {
   name: 'App',
   data(){
     return {
-      
+      userInfo:{
+        userName:null,
+        nickName:null
+      }
     }
   },
+  mounted(){
+    this.getUserInfo();
+  },
   methods:{
-    // gogogo:function(){
-    //   alert('1111')
-    // }
+    getUserInfo:function(){
+      this.userInfo={
+        userName:'',
+        nickName:''
+      }
+      // this.$store.commit('updateUserInfo', this.userInfo); 
+    }
   }
 }
 </script>

@@ -7,6 +7,7 @@ import mine from '@/page/mine'
 import goodsdetails from '@/page/goodsdetails'
 import login from '@/page/login'
 import demo from '@/page/demo'
+import router from '../router'
 
 Vue.use(Router)
 
@@ -46,3 +47,11 @@ export default new Router({
     }
   ]
 })
+
+
+router.beforeEach((to,from,next) => {   
+  debugger;
+  // alert(111)
+  next()
+
+  })
