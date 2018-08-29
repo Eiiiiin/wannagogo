@@ -33,6 +33,8 @@
   import {
     Toast
   } from 'vant';
+
+  import {mapGetters,mapState} from 'vuex'
   export default {
     name: "login",
     data() {
@@ -42,6 +44,9 @@
       };
     },
     created() {},
+    mounted(){
+      // this.okLogin()
+    },
     methods: {
       goBack: function() {
         this.common.cheakLogin()
@@ -50,18 +55,35 @@
       okLogin: function() {//登陆
       // debugger;
       let userInfo={
+        nick:'昵称111',
         username:this.username,
         userpsw:this.userpsw,
-        loginType:1
+        isLogin:true
       }
-      let data = 1;
-        this.$store.commit('updateUserInfo',userInfo,1); 
+
+    
+
+        this.$store.commit('isLogin',userInfo); 
         Toast.loading({
           mask: true,
           message: '登录中...'
         });
-        location.href = '/mine'
+        // location.href = '/mine'
+        this.$router.push({name:'mine'})
       }
+    },
+    // computed:mapGetters(['isLogin']),
+    computed:{
+      ...mapGetters([
+        'isLogin'
+      ]),
+      // ...mapState({
+      //   isLogin : state=>state.isLogin
+      // })
+      // ...mapGetters({
+      //   isLogin:state=>state.isLogin
+      // }),
+      // ...mapState(['isLogin'])
     },
     components: {}
   };

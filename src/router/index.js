@@ -50,8 +50,7 @@ export default new Router({
 
 
 router.beforeEach((to,from,next) => {   
-  debugger;
-  // alert(111)
+
   next()
 
   })
