@@ -1,5 +1,5 @@
 const state = {
-    isLogin:false,
+    // isLogin:false,
     // userInfo :{
     //     userName:'这是测试用的用户名',
     //     nick:'这是登陆的nick',
@@ -16,7 +16,7 @@ const getters = {
 //     }
     
 // },
-isLogin:state=>state.isLogin
+// isLogin:state=>state.isLogin
 }
 
 const actions = {
@@ -25,13 +25,12 @@ const actions = {
 
 const mutations = {
     //更新用户信息
-   isLogin(state,userInfo){
-       debugger;
-    //    sessionStorage.setItem('isLogin',userInfo.isLogin)
-    state.isLogin = userInfo.isLogin;
-    // state.userName = userInfo.userName;
-    // sessionStorage.setItem('userName',userInfo.userName)
-   }
+//    isLogin(state,userInfo){
+//     //    sessionStorage.setItem('isLogin',userInfo.isLogin)
+//     state.isLogin = userInfo.isLogin;
+//     // state.userName = userInfo.userName;
+//     // sessionStorage.setItem('userName',userInfo.userName)
+//    }
     
     
 }

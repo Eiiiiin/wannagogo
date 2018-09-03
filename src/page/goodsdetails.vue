@@ -111,171 +111,115 @@
       </van-row>
     </footer>
    
-<van-sku
-  v-model="showBase"
-  :sku="sku"
-  :goods="goods"
-  :goods-id="sku.tree.goodsId"
-  :hide-stock="sku.hide_stock"
-  :quota="sku.tree.quota"
-  :quota-used="sku.list.quotaUsed"
-  :reset-stepper-on-hide="resetStepperOnHide"
-  :reset-selected-sku-on-hide="resetSelectedSkuOnHide"
-  :close-on-click-overlay="closeOnClickOverlay"
-  :disable-stepper-input="disableStepperInput"
-  :message-config="sku.list.messageConfig"
-/>
+<div class="shadow" v-if="shadow" @click="offshadow"></div>
+<sku  v-if="showSku" @closeSku='getsku' />
   </div>
 </template>
 <script>
-  import {
-    Toast
-  } from 'vant';
-  
-  export default {
-    name: "mine",
-    data() {
-      return {
-        goodId: this.$route.query.goodsId || [],
-        isLoading: false,
-        banner: {
-          speed: 500,
-          pagination: {
-            el: ".swiper-pagination",
-            bulletElement: "li"
-          }
-        },
-        goodsInfo: [],
-        showBase:false,
-        resetStepperOnHide:true,//窗口隐藏时重置已选择的sku
-        resetSelectedSkuOnHide:true,//是否禁用sku中stepper的input框
-        closeOnClickOverlay:true,//点击popup的overlay后是否关闭弹窗
-        disableStepperInput:false,//是否禁用sku中stepper的input框
-        sku: {
-  // 所有sku规格类目与其值的从属关系，比如商品有颜色和尺码两大类规格，颜色下面又有红色和蓝色两个规格值。
-  // 可以理解为一个商品可以有多个规格类目，一个规格类目下可以有多个规格值。
-  tree: [
-    {goodsId:'',
-    quota:'',
-      k: '颜色', // skuKeyName：规格类目名称
-      v: [
-        {
-          id: '30349', // skuValueId：规格值 id
-          name: '红色', // skuValueName：规格值名称
-          imgUrl: 'https://img.yzcdn.cn/1.jpg' // 规格类目图片，只有第一个规格类目可以定义图片
-        },
-        {
-          id: '1215',
-          name: '蓝色',
-          imgUrl: 'https://img.yzcdn.cn/2.jpg'
+import { Toast } from "vant";
+import sku from "@/components/sku";
+
+export default {
+  name: "mine",
+  data() {
+    return {
+      changeLogin: false,
+      goodId: this.$route.query.goodsId || [],
+      isLoading: false,
+      banner: {
+        speed: 500,
+        pagination: {
+          el: ".swiper-pagination",
+          bulletElement: "li"
         }
-      ],
-      k_s: 's1' // skuKeyStr：sku 组合列表（下方 list）中当前类目对应的 key 值，value 值会是从属于当前类目的一个规格值 id
-    }
-  ],
-  // 所有 sku 的组合列表，比如红色、M 码为一个 sku 组合，红色、S 码为另一个组合
-  list: [
-    {
-      messageConfig:'',
-      quotaUsed:'',
-      id: 2259, // skuId，下单时后端需要
-      price: 100, // 价格（单位分）
-      s1: '1215', // 规格类目 k_s 为 s1 的对应规格值 id
-      s2: '1193', // 规格类目 k_s 为 s2 的对应规格值 id
-      s3: '0', // 最多包含3个规格值，为0表示不存在该规格
-      stock_num: 110 // 当前 sku 组合对应的库存
-    }
-  ],
-  price: '1.00', // 默认价格（单位元）
-  stock_num: 227, // 商品总库存
-  collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-  none_sku: false, // 是否无规格商品
-  messages: [
-    {
-      // 商品留言
-      datetime: '0', // 留言类型为 time 时，是否含日期。'1' 表示包含
-      multiple: '0', // 留言类型为 text 时，是否多行文本。'1' 表示多行
-      name: '留言', // 留言名称
-      type: 'text', // 留言类型，可选: id_no（身份证）, text, tel, date, time, email
-      required: '1' // 是否必填 '1' 表示必填
-    }
-  ],
-  hide_stock: false // 是否隐藏剩余库存
-},
-goods: {
-  // 商品标题
-  title: '测试商品',
-  // 默认商品 sku 缩略图
-  picture: 'https://img.yzcdn.cn/1.jpg'
-}
-      
-      };
+      },
+      goodsInfo: [],
+      shadow:false,
+      showSku:false
+    };
+  },
+  created() {
+    this.getGoodsInfo("", data => {
+      this.getGoodsInfo.data;
+    });
+  },
+  methods: {
+    getGoodsInfo: function() {
+      let that = this;
+      let id = parseInt(that.$route.query.goodsId);
+      that.$axios
+        .get("http://127.0.0.1:8081/getProductDetail", {
+          params: {
+            id
+          }
+        })
+        .then(function(res) {
+          that.goodsInfo = res.data.message;
+        });
     },
-    created() {
-      this.getGoodsInfo("", data => {
-        this.getGoodsInfo.data;
+    goBack: function() {
+      this.$router.push({
+        name: "shopping"
       });
     },
-    methods: {
-      getGoodsInfo: function() {
-        let that = this;
-        let id = parseInt(that.$route.query.goodsId);
-        that.$axios
-          .get("http://127.0.0.1:8081/getProductDetail", {
-            params: {
-              id
-            }
-          })
-          .then(function(res) {
-            that.goodsInfo = res.data.message;
-          });
-      },
-      goBack: function() {
-        this.$router.push({
-          name: "shopping"
-        });
-      },
-      addShopCar: function() { //加入购物车
-      this.showBase=true;
-        // this.common.cheakLogin()
-      },
-      buyNow: function() { //立刻购买
-        this.common.cheakLogin()
-      },
-      callSeller: function() { //联系卖家
-        const Num = Toast.loading({
-          duration: 0, // 持续展示 toast
-          forbidClick: true, // 禁用背景点击
-          loadingType: 'spinner',
-          message: '倒计时 3 秒'
-        });
-        let second = 3;
-        const timer = setInterval(() => {
-          second--;
-          if (second) {
-            Num.message = `倒计时 ${second} 秒`;
-          } else {
-            clearInterval(timer);
-            Num.clear();
-            Toast('卖家貌似被绑架了,请稍候再联系他');
-          }
-        }, 1000);
-      },
-             onRefresh() {
+    addShopCar: function() {
+      //加入购物车
+      this.common.cheakLogin();
+       this.shadow=true;
+      this.showSku=true;
+      console.log("加入购物车");
+    },
+    buyNow: function() {
+      //立刻购买
+      this.common.cheakLogin();
+      console.log("立刻购买");
+     
+    },
+    callSeller: function() {
+      //联系卖家
+      const Num = Toast.loading({
+        duration: 0, // 持续展示 toast
+        forbidClick: true, // 禁用背景点击
+        loadingType: "spinner",
+        message: "倒计时 3 秒"
+      });
+      let second = 3;
+      const timer = setInterval(() => {
+        second--;
+        if (second) {
+          Num.message = `倒计时 ${second} 秒`;
+        } else {
+          clearInterval(timer);
+          Num.clear();
+          Toast("卖家貌似被绑架了,请稍候再联系他");
+        }
+      }, 1000);
+    },
+    onRefresh() {
       setTimeout(() => {
-        this.$toast('刷新成功');
+        this.$toast("刷新成功");
         this.isLoading = false;
         this.count++;
       }, 500);
-    }
     },
-    components: {}
-  };
+    offshadow:function(){
+      this.shadow=false;
+      this.showSku=false;
+    },
+    getsku:function(skuList){//sku传过来的参数
+      this.showSku=skuList
+      this.shadow=false;
+    }
+  },
+  components: {
+    sku
+  }
+};
 </script>
 <style lang="less" scoped>
-  #goodsdetails {
-    .van-pull-refresh{
-        padding-bottom: 45px;
+#goodsdetails {
+  .van-pull-refresh {
+    padding-bottom: 45px;
     header {
       overflow: hidden;
       i {
@@ -429,7 +373,7 @@ goods: {
       padding-bottom: 14px;
       p {
         font-weight: bolder;
-      } 
+      }
       ul {
         overflow: hidden;
         li {
@@ -441,38 +385,46 @@ goods: {
         }
       }
     }
-    }
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      z-index: 10;
-      .van-row {
-        .van-col {
-          height: 45px;
-          text-align: center;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    .van-row {
+      .van-col {
+        height: 45px;
+        text-align: center;
+      }
+      .van-col:first-child {
+        background-color: #fff;
+        padding-top: 3px;
+        i {
+          font-size: 20px;
         }
-        .van-col:first-child {
-          background-color: #fff;
-          padding-top: 3px;
-          i {
-            font-size: 20px;
-          }
-          p {
-            font-size: 10px;
-          }
+        p {
+          font-size: 10px;
         }
-        .van-col:nth-child(2) {
-          background-color: #9a9aa6;
-          color: #fff;
-          line-height: 45px;
-        }
-        .van-col:last-child {
-          background-color: #2e2e2e;
-          line-height: 45px;
-          color: #fff;
-        }
+      }
+      .van-col:nth-child(2) {
+        background-color: #9a9aa6;
+        color: #fff;
+        line-height: 45px;
+      }
+      .van-col:last-child {
+        background-color: #2e2e2e;
+        line-height: 45px;
+        color: #fff;
       }
     }
   }
+  .shadow {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 20;
+  }
+}
 </style>

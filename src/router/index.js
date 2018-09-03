@@ -40,7 +40,8 @@ export default new Router({
       path:'/login',
       name:'login',
       component:login
-    },{
+    },
+    {
       path:'/demo',
       name:'demo',
       component:demo
@@ -49,8 +50,15 @@ export default new Router({
 })
 
 
-router.beforeEach((to,from,next) => {   
+// router.beforeEach((to,from,next) => {   
+// let userInfo = localStorage.getItem('userInfo');
+// // debugger;
+// if(userInfo){
+// alert('一登录')
+//   next()
+// }else{
+//   alert('请登录')
+//   next()
+// }
 
-  next()
-
-  })
+//   })

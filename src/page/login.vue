@@ -1,5 +1,5 @@
 <template>
-  <div id="login">
+  <div id="login" >
     <header>
       <i class="iconfont icon-zuojiantou" @click="goBack"></i>
       <span>密码登录</span>
@@ -40,52 +40,35 @@
     data() {
       return {
         username: '',
-        userpsw: ''
+        userpsw: '',
       };
     },
-    created() {},
+    created() {
+    },
     mounted(){
-      // this.okLogin()
     },
     methods: {
       goBack: function() {
-        this.common.cheakLogin()
-        history.back(-1);
+         this.$router.go(-1)
       },
       okLogin: function() {//登陆
-      // debugger;
-      let userInfo={
-        nick:'昵称111',
-        username:this.username,
-        userpsw:this.userpsw,
-        isLogin:true
-      }
 
-    
-
-        this.$store.commit('isLogin',userInfo); 
+      let userInfo = this.username;
+      localStorage.setItem('userInfo',userInfo)
         Toast.loading({
           mask: true,
-          message: '登录中...'
+          message: '登录成功'
         });
-        // location.href = '/mine'
-        this.$router.push({name:'mine'})
+
+        this.$router.go(-1)
       }
     },
-    // computed:mapGetters(['isLogin']),
     computed:{
-      ...mapGetters([
-        'isLogin'
-      ]),
-      // ...mapState({
-      //   isLogin : state=>state.isLogin
-      // })
-      // ...mapGetters({
-      //   isLogin:state=>state.isLogin
-      // }),
-      // ...mapState(['isLogin'])
+
     },
-    components: {}
+    components: {
+
+    },
   };
 </script>
 <style lang="less" scoped>
@@ -93,7 +76,13 @@
     //     height: 100%;
     // z-index: 9999999;
     // position: fixed;
-    // background-color: #fff;
+    background-color: #fff;
+    width:100%;
+    height:100%;
+    position: fixed;
+    // background-color: #ccc;
+    top: 0;
+    z-index: 10;
     header {
       height: 4.13rem;
       text-align: center;

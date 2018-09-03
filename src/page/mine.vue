@@ -5,8 +5,9 @@
             <div>
                 <i class="minemsg"></i>
                 <div class="btn">
-                    <p>在这里,找到属于你的不一样</p>
-                    <van-button @click="goLogin">登陆/注册</van-button>
+                    <p v-if="isLogin2">在这里,找到属于你的不一样</p>
+                    <van-button @click="goLogin" v-if="isLogin2">登陆/注册</van-button>
+                    <p v-if="isLogin">{{userName}}</p>
                 </div>
                 <div class="toptip">
                     <li>
@@ -54,7 +55,11 @@
         data() {
             return {
                 mineNav: [],
-                isLoading: false
+                isLogin: false,//是否登陆
+                isLogin2:true,//取反的登陆状态
+                isLoading:'',//下拉刷新
+                userName:''
+
             };
         },
         created() {
@@ -62,7 +67,15 @@
                 this.getmineNav.data;
             });
         },
-        mounted() {},
+        mounted() {
+            debugger
+            let cheakLogin = localStorage.getItem('userInfo')
+            if(cheakLogin){
+                this.isLogin = true;
+                this.userName = cheakLogin;
+                this.isLogin2=false;
+            }
+        },
         methods: {
             getmineNav: function() {
                 var that = this;

@@ -26,7 +26,7 @@ export default {
 
 <style lang='less'>
 html,body{
-  height: 100%;
+  // height: 100%;
 }
 html,body,ul,li,a,p,h1,h2,h3{
   margin:0;
